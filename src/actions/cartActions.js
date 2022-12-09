@@ -1,8 +1,9 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 import { ADD_TO_CART } from "../constants/CartConstants";
 export const addToCart = (id, qty) => async (dispatch, getState) => {
-	const { data } = await axios.get(`/api/v1/products/${id}`);
+	const { data } = await axios.get(
+		`https://mern-backend-beryl.vercel.app/api/v1/products/${id}`
+	);
 	dispatch({
 		type: ADD_TO_CART,
 		payload: {

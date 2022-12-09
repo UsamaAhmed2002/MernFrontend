@@ -36,7 +36,7 @@ export const login = (user) => async (dispatch) => {
 		});
 
 		const { data } = await axios.post(
-			`http://localhost:4000/api/v1/user/login`,
+			`https://mern-backend-beryl.vercel.app/api/v1/user/login`,
 			{
 				email,
 				password,
@@ -61,7 +61,7 @@ export const register = (user) => async (dispatch) => {
 		});
 
 		const { data } = await axios.post(
-			`http://localhost:4000/api/v1/user/register`,
+			`https://mern-backend-beryl.vercel.app/api/v1/user/register`,
 			{
 				name,
 				email,
@@ -88,7 +88,7 @@ export const updateProfile = (name, email) => async (dispatch) => {
 		});
 
 		const { data } = await axios.patch(
-			`http://localhost:4000/api/v1/user/me/update`,
+			`https://mern-backend-beryl.vercel.app/api/v1/user/me/update`,
 			{
 				name,
 				email,
@@ -112,7 +112,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
 			type: UPDATE_PASSWORD_REQUEST,
 		});
 		const { data } = await axios.patch(
-			`http://localhost:4000/api/v1/user/updatepassword`,
+			`https://mern-backend-beryl.vercel.app/api/v1/user/updatepassword`,
 			passwords
 		);
 		dispatch({
@@ -134,7 +134,7 @@ export const resetPassword =
 				type: RESET_PASSWORD_REQUEST,
 			});
 			const { data } = await axios.patch(
-				`http://localhost:4000/api/v1/user/password/reset/${token}`,
+				`https://mern-backend-beryl.vercel.app/api/v1/user/password/reset/${token}`,
 				{ password, confirmPassword }
 			);
 			dispatch({
@@ -156,7 +156,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 			type: FORGOT_PASSWORD_REQUEST,
 		});
 		const { data } = await axios.post(
-			`http://localhost:4000/api/v1/user/password/forgot`,
+			`https://mern-backend-beryl.vercel.app/api/v1/user/password/forgot`,
 			{
 				email,
 			}
@@ -178,7 +178,9 @@ export const getUserDetails = () => async (dispatch) => {
 			type: LOAD_USER_REQUEST,
 		});
 
-		const { data } = await axios.get(`http://localhost:4000/api/v1/user/me`);
+		const { data } = await axios.get(
+			`https://mern-backend-beryl.vercel.app/api/v1/user/me`
+		);
 		dispatch({
 			type: LOAD_USER_SUCCESS,
 			payload: data.user,
@@ -193,7 +195,7 @@ export const getUserDetails = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
 	try {
 		dispatch({ type: LOGOUT_USER_REQUEST });
-		await axios.get("http://localhost:4000/api/v1/user/logout");
+		await axios.get("https://mern-backend-beryl.vercel.app/api/v1/user/logout");
 		dispatch({
 			type: LOGOUT_USER_SUCCESS,
 		});

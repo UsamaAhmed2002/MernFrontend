@@ -18,7 +18,10 @@ export const CreateOrder = (order) => async (dispatch) => {
 			type: CREATE_ORDER_REQUEST,
 		});
 
-		const { data } = await axios.post("/api/v1/orders", order);
+		const { data } = await axios.post(
+			"https://mern-backend-beryl.vercel.app/api/v1/orders",
+			order
+		);
 
 		dispatch({
 			type: CREATE_ORDER_SUCCESS,
@@ -35,7 +38,9 @@ export const CreateOrder = (order) => async (dispatch) => {
 export const MyOrders = () => async (dispatch) => {
 	try {
 		dispatch({ type: MY_ORDER_REQUEST });
-		const { data } = await axios.get("/api/v1/myorders");
+		const { data } = await axios.get(
+			"https://mern-backend-beryl.vercel.app/api/v1/myorders"
+		);
 
 		dispatch({ type: MY_ORDER_SUCCESS, payload: data.orders });
 	} catch (e) {
@@ -47,7 +52,9 @@ export const GetOrderDetails = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: GET_SINGLE_ORDER_REQUEST });
 
-		const { data } = await axios.get(`/api/v1/orders/${id}`);
+		const { data } = await axios.get(
+			`https://mern-backend-beryl.vercel.app/api/v1/orders/${id}`
+		);
 		dispatch({ type: GET_SINGLE_ORDER_SUCCESS, payload: data.order });
 	} catch (e) {
 		dispatch({

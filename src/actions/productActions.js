@@ -35,15 +35,15 @@ export const getAllProducts =
 			dispatch({
 				type: ALL_PRODUCTS_REQUEST,
 			});
-			let link = `http://localhost:4000/api/v1/products?page=${page}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${rating[0]}&ratings[lte]=${rating[1]}`;
+			let link = `https://mern-backend-beryl.vercel.app/api/v1/products?page=${page}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${rating[0]}&ratings[lte]=${rating[1]}`;
 			if (catagory) {
-				link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${page}&price[gte]=${price[0]}&price[lte]=${price[1]}&catagory=${catagory}&ratings[gte]=${rating[0]}&ratings[lte]=${rating[1]}`;
+				link = `https://mern-backend-beryl.vercel.app/api/v1/products?keyword=${keyword}&page=${page}&price[gte]=${price[0]}&price[lte]=${price[1]}&catagory=${catagory}&ratings[gte]=${rating[0]}&ratings[lte]=${rating[1]}`;
 			}
 			if (keyword) {
-				link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${page}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${rating[0]}&ratings[lte]=${rating[1]}`;
+				link = `https://mern-backend-beryl.vercel.app/api/v1/products?keyword=${keyword}&page=${page}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${rating[0]}&ratings[lte]=${rating[1]}`;
 			}
 			if (catagory && keyword) {
-				link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${page}&price[gte]=${price[0]}&price[lte]=${price[1]}&catagory=${catagory}&ratings[gte]=${rating[0]}&ratings[lte]=${rating[1]}`;
+				link = `https://mern-backend-beryl.vercel.app/api/v1/products?keyword=${keyword}&page=${page}&price[gte]=${price[0]}&price[lte]=${price[1]}&catagory=${catagory}&ratings[gte]=${rating[0]}&ratings[lte]=${rating[1]}`;
 			}
 
 			const { data } = await axios.get(link);
@@ -65,7 +65,9 @@ export const GetAdminProducts = () => async (dispatch) => {
 	try {
 		dispatch({ type: ADMIN_PRODUCTS_REQUEST });
 
-		const { data } = await axios.get("/api/v1/admin/products");
+		const { data } = await axios.get(
+			"https://mern-backend-beryl.vercel.app/api/v1/admin/products"
+		);
 
 		dispatch({ type: ADMIN_PRODUCTS_SUCCESS, payload: data.products });
 	} catch (e) {
@@ -78,7 +80,9 @@ export const deleteProduct = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: ADMIN_DELETE_PRODUCTS_REQUEST });
 
-		const { data } = await axios.delete(`/api/v1/admin/products/${id}`);
+		const { data } = await axios.delete(
+			`https://mern-backend-beryl.vercel.app/api/v1/admin/products/${id}`
+		);
 
 		dispatch({ type: ADMIN_DELETE_PRODUCTS_SUCCESS, payload: data.success });
 	} catch (e) {
@@ -93,7 +97,10 @@ export const createProduct = (formData) => async (dispatch) => {
 	try {
 		dispatch({ type: ADMIN_CREATE_PRODUCT_REQUEST });
 
-		const { data } = await axios.post(`/api/v1/admin/products`, formData);
+		const { data } = await axios.post(
+			`https://mern-backend-beryl.vercel.app/api/v1/admin/products`,
+			formData
+		);
 
 		dispatch({ type: ADMIN_CREATE_PRODUCT_SUCCESS, payload: data.success });
 	} catch (e) {
@@ -110,7 +117,7 @@ export const updateProduct = (id, formData) => async (dispatch) => {
 		dispatch({ type: ADMIN_UPDATE_PRODUCT_REQUEST });
 
 		const { data } = await axios.patch(
-			`/api/v1/admin/products/${id}`,
+			`https://mern-backend-beryl.vercel.app/api/v1/admin/products/${id}`,
 			formData
 		);
 		dispatch({ type: ADMIN_UPDATE_PRODUCT_SUCCESS, payload: data.status });
