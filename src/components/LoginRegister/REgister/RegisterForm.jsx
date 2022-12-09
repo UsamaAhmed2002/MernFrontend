@@ -1,26 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Toast } from "reactstrap";
 import { clearErrors, register } from "../../../actions/userLoginAction";
 import "./Registerform.css";
 import { toast } from "react-toastify";
 import Loader from "./../../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 const RegisterForm = () => {
+	//hooks
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const [user, setUser] = useState();
+
+	//state for loading user
 	const { loading, isAuthenticated, error } = useSelector(
 		(state) => state.user
 	);
-	const [user, setUser] = useState();
+
+	//handler for when a user submits register form
 	const handleRegisterUser = (e) => {
 		e.preventDefault();
 		dispatch(register(user));
 	};
+
+	//input onchange handler
 	const handleSetUser = (e) => {
 		const { name, value } = e.target;
 		setUser({ ...user, [name]: value });
 	};
+
+	//useEffect used if theres any error or when the user registered  successfully
 	useEffect(() => {
 		if (error) {
 			toast.error(error);

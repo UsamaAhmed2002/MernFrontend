@@ -23,7 +23,7 @@ const LoginForm = () => {
 	//handler when a user clicks loginbtn
 	const handleLogin = (e) => {
 		e.preventDefault();
-		login(user);
+		dispatch(login(user));
 	};
 
 	//handler for onchange input
@@ -36,7 +36,7 @@ const LoginForm = () => {
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
-			clearErrors();
+			dispatch(clearErrors());
 		}
 		if (isAuthenticated) {
 			setTimeout(() => {

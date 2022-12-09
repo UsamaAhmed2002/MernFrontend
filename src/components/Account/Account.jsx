@@ -42,7 +42,7 @@ const Account = () => {
 			toast.error(error);
 			clearErrors();
 		}
-		getUserDetails();
+		dispatch(getUserDetails());
 	}, []);
 	return (
 		<>
