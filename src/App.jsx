@@ -12,7 +12,7 @@ import AllProducts from "./components/AllProducts/AllProducts";
 import LoginRegister from "./components/LoginRegister/LoginRegister";
 import Account from "./components/Account/Account";
 import { useEffect, useState } from "react";
-import { getUserDetails } from "./actions/userLoginAction";
+import { clearErrors, getUserDetails } from "./actions/userLoginAction";
 import { store } from "./Store";
 import UserActions from "./components/UserActions/UserActions.jsx";
 import { useSelector } from "react-redux";
@@ -33,11 +33,19 @@ import AllProduct from "./components/Admin/Products/AllProducts.jsx";
 import CreateProduct from "./components/Admin/CreateProduct/CreateProduct.jsx";
 import EditProduct from "./components/Admin/EditProduct/EditProduct";
 function App() {
-	const { user, isAuthenticated, loading } = useSelector((state) => state.user);
+	const { user, isAuthenticated, loading, error } = useSelector(
+		(state) => state.user
+	);
 
 	useEffect(() => {
-		store.dispatch(getUserDetails());
-	}, []);
+		if (!isAuthenticated) {
+			store.dispatch(getUserDetails());
+			if (error) {
+				toast.error(error);
+				store.dispatch(clearErrors());
+			}
+		}
+	}, [error]);
 	return (
 		<Router>
 			<Header />
