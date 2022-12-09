@@ -27,7 +27,6 @@ import {
 	RESET_PASSWORD_FAIL,
 } from "../constants/UserConstants";
 import axios from "axios";
-import { config } from "dotenv";
 export const login = (user) => async (dispatch) => {
 	try {
 		const { email, password } = user;

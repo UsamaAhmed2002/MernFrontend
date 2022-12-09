@@ -6,28 +6,42 @@ import { toast } from "react-toastify";
 import Loader from "./../../Loader/Loader";
 import { useNavigate, Link } from "react-router-dom";
 const LoginForm = () => {
-	//now handling and dispatching state for login user
 	const dispatch = useDispatch();
+
+	//now handling and dispatching state for login user
+
 	const { loading, error, isAuthenticated } = useSelector(
 		(state) => state.user
 	);
+
+	//useState for handling user login form
 	const [user, setUser] = useState();
+
+	//navigation hook
 	const navigate = useNavigate();
+
+	//handler when a user clicks loginbtn
 	const handleLogin = (e) => {
 		e.preventDefault();
-		dispatch(login(user));
+		login(user);
 	};
-	const handleLoginUser = (e) => {
+
+	//handler for onchange input
+	const handleLoginUserOnChange = (e) => {
 		const { name, value } = e.target;
 		setUser({ ...user, [name]: value });
 	};
+
+	//useEffect for initial errors and navigatning
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
-			dispatch(clearErrors());
+			clearErrors();
 		}
 		if (isAuthenticated) {
-			navigate(`/account`);
+			setTimeout(() => {
+				navigate(`/account`);
+			}, 1000);
 		}
 	}, [dispatch, error, isAuthenticated]);
 
@@ -42,14 +56,14 @@ const LoginForm = () => {
 						name="email"
 						placeholder="Email"
 						required
-						onChange={handleLoginUser}
+						onChange={handleLoginUserOnChange}
 					/>
 					<input
 						type="password"
 						name="password"
 						required
 						placeholder="Password"
-						onChange={handleLoginUser}
+						onChange={handleLoginUserOnChange}
 					/>
 					<Link className="forgotp" to={"/forgotpassword"}>
 						Forgot Password?

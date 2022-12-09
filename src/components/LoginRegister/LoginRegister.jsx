@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import LoginForm from "./Login/LoginForm";
 import "./LoginRegister.css";
 import RegisterForm from "./REgister/RegisterForm";
-import { useSelector } from "react-redux";
 const LoginRegister = () => {
-	const { isAuthneticated, loading } = useSelector((state) => state.user);
-	const [form, setForm] = useState("LoginForm");
+	const [form, setForm] = useState("registerForm");
 	return (
 		<>
 			{loading ? (
