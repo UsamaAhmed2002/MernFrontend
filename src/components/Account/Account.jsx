@@ -12,7 +12,11 @@ const Account = () => {
 	const dispatch = useDispatch();
 
 	//getting state when user is logged in
-	const { user = {}, loading, error } = useSelector((state) => state.user);
+	const {
+		user = {},
+		loading = true,
+		error,
+	} = useSelector((state) => state.user);
 
 	//handler when a user clicks profile edit btn
 	const handleEditProfileBtn = (e) => {
