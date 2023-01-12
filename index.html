@@ -12,15 +12,8 @@
 			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 			crossorigin="anonymous"
 		/>
-		<script
-			async
-			defer
-			src="https://connect.facebook.net/en_US/sdk.js"
-		></script>
 	</head>
 	<body>
-		<div id="fb-root"></div>
-
 		<div id="root"></div>
 		<script type="module" src="/src/main.jsx"></script>
 		<script
@@ -28,5 +21,29 @@
 			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 			crossorigin="anonymous"
 		></script>
+		<script>
+			window.fbAsyncInit = function () {
+				FB.init({
+					appId: "5701241519930154",
+					cookie: true,
+					xfbml: true,
+					version: "v15.0",
+				});
+
+				FB.AppEvents.logPageView();
+			};
+
+			(function (d, s, id) {
+				var js,
+					fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) {
+					return;
+				}
+				js = d.createElement(s);
+				js.id = id;
+				js.src = "https://connect.facebook.net/en_US/sdk.js";
+				fjs.parentNode.insertBefore(js, fjs);
+			})(document, "script", "facebook-jssdk");
+		</script>
 	</body>
 </html>

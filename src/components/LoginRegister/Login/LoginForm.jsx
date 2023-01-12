@@ -65,6 +65,10 @@ const LoginForm = () => {
 						placeholder="Password"
 						onChange={handleLoginUserOnChange}
 					/>
+					<fb:login-button
+						scope="public_profile,email"
+						onlogin="checkLoginState();"
+					></fb:login-button>
 					<Link className="forgotp" to={"/forgotpassword"}>
 						Forgot Password?
 					</Link>
