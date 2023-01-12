@@ -43,7 +43,7 @@ function App() {
 			appId: " 5701241519930154",
 			cookie: true,
 			xfbml: true,
-			version: "15.0",
+			version: "v15.0",
 		});
 		FB.login(function (response) {
 			if (response) {
