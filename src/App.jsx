@@ -39,21 +39,19 @@ function App() {
 	);
 
 	useEffect(() => {
-		window.fbAsyncInit = function () {
-			FB.init({
-				appId: " 5701241519930154",
-				cookie: true,
-				xfbml: true,
-				version: "15.0",
-			});
-			FB.login(function (response) {
-				if (response) {
-					console.log("logged in", response);
-				} else {
-					console.log("User cancelled login or did not fully authorize.");
-				}
-			});
-		};
+		FB.init({
+			appId: " 5701241519930154",
+			cookie: true,
+			xfbml: true,
+			version: "15.0",
+		});
+		FB.login(function (response) {
+			if (response) {
+				console.log("logged in", response);
+			} else {
+				console.log("User cancelled login or did not fully authorize.");
+			}
+		});
 	}, []);
 	return (
 		<Router>
