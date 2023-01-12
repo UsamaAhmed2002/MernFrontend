@@ -41,10 +41,10 @@ function App() {
 	useEffect(() => {
 		window.fbAsyncInit = function () {
 			FB.init({
-				appId: " 5701241519930154",
+				appId: "5701241519930154",
 				cookie: true,
 				xfbml: true,
-				version: "15.0",
+				version: "v2.0",
 			});
 			FB.login(function (response) {
 				if (response) {
