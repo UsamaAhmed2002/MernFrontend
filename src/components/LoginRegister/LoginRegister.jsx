@@ -13,17 +13,6 @@ const LoginRegister = () => {
 			{ scope: "public_profile,email" }
 		);
 	};
-
-	useEffect(() => {
-		window.fbAsyncInit = function () {
-			FB.init({
-				appId: "5701241519930154",
-				cookie: true,
-				xfbml: true,
-				version: "v15.0",
-			});
-		};
-	}, []);
 	return (
 		<>
 			<div className="mainContainer">

@@ -45,10 +45,10 @@ function App() {
 	useEffect(() => {
 		window.fbAsyncInit = function () {
 			FB.init({
-				appId: "YOUR_APP_ID",
+				appId: " 5701241519930154",
 				cookie: true,
 				xfbml: true,
-				version: "v9.0",
+				version: "v15.0",
 			});
 		};
 	}, []);
