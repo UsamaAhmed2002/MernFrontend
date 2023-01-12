@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
 	Backdrop,
 	SpeedDial,
@@ -14,9 +14,13 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { logout } from "./../../actions/userLoginAction.js";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { clearErrors } from "../../actions/productDetailsActions.js";
+import Loader from "../Loader/Loader.jsx";
 const UserActions = () => {
 	const dispatch = useDispatch();
-	const { user, isAuthenticated } = useSelector((state) => state.user);
+	const { user, isAuthenticated, error, loading } = useSelector(
+		(state) => state.user
+	);
 	const { cartItems } = useSelector((state) => state.cart);
 	const [open, setOpen] = useState(false);
 	const navigate = useNavigate();
@@ -58,31 +62,43 @@ const UserActions = () => {
 	function cartBtn() {
 		navigate("/cart");
 	}
+	useEffect(() => {
+		if (error) {
+			toast.error(error);
+			dispatch(clearErrors());
+		}
+	}, [error]);
 	return (
 		<Fragment>
-			<Backdrop sx={{ color: "#fff", zIndex: 1000 }} open={open}></Backdrop>
-			<SpeedDial
-				ariaLabel="SpeedDial basic example"
-				sx={{
-					position: "fixed",
-					top: 150,
-					right: 50,
-				}}
-				icon={<PersonIcon />}
-				onClose={() => setOpen(false)}
-				onOpen={() => setOpen(true)}
-				direction="down"
-			>
-				{option.map((item) => (
-					<SpeedDialAction
-						key={item.name}
-						icon={item.icon}
-						tooltipTitle={item.name}
-						onClick={item.func}
-						tooltipOpen={window.innerWidth <= 600 ? true : false}
-					/>
-				))}
-			</SpeedDial>
+			{loading ? (
+				<Loader />
+			) : (
+				<>
+					<Backdrop sx={{ color: "#fff", zIndex: 1000 }} open={open}></Backdrop>
+					<SpeedDial
+						ariaLabel="SpeedDial basic example"
+						sx={{
+							position: "fixed",
+							top: 150,
+							right: 50,
+						}}
+						icon={<PersonIcon />}
+						onClose={() => setOpen(false)}
+						onOpen={() => setOpen(true)}
+						direction="down"
+					>
+						{option.map((item) => (
+							<SpeedDialAction
+								key={item.name}
+								icon={item.icon}
+								tooltipTitle={item.name}
+								onClick={item.func}
+								tooltipOpen={window.innerWidth <= 600 ? true : false}
+							/>
+						))}
+					</SpeedDial>
+				</>
+			)}
 		</Fragment>
 	);
 };

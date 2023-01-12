@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { clearErrors, getUserDetails } from "./actions/userLoginAction";
 import { store } from "./Store";
 import UserActions from "./components/UserActions/UserActions.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EditProfile from "./components/EditProfile/EditProfile";
 import OrderDetails from "./components/Orders/Orders";
 import UpdatePassword from "./components/UpdatePassword/UpdatePassword";
@@ -33,19 +33,25 @@ import AllProduct from "./components/Admin/Products/AllProducts.jsx";
 import CreateProduct from "./components/Admin/CreateProduct/CreateProduct.jsx";
 import EditProduct from "./components/Admin/EditProduct/EditProduct";
 function App() {
+	const dispatch = useDispatch();
 	const { user, isAuthenticated, loading, error } = useSelector(
 		(state) => state.user
 	);
 
+	// useEffect(() => {
+	// 	dispatch(getUserDetails());
+	// 	if (error) dispatch({ type: "CLEAR_ERRORS" });
+	// }, []);
 	useEffect(() => {
-		if (!isAuthenticated) {
-			store.dispatch(getUserDetails());
-			if (error) {
-				toast.error(error);
-				store.dispatch(clearErrors());
-			}
-		}
-	}, [error]);
+		window.fbAsyncInit = function () {
+			FB.init({
+				appId: "YOUR_APP_ID",
+				cookie: true,
+				xfbml: true,
+				version: "v9.0",
+			});
+		};
+	}, []);
 	return (
 		<Router>
 			<Header />

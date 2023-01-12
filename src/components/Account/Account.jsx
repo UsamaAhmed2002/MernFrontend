@@ -6,6 +6,7 @@ import Loader from "../Loader/Loader";
 import "./Account.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { CLEAR_ERRORS } from "../../constants/productConstants";
 const Account = () => {
 	//hooks
 	const navigate = useNavigate();
@@ -40,10 +41,10 @@ const Account = () => {
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
-			clearErrors();
+			dispatch({ type: CLEAR_ERRORS });
 		}
 		dispatch(getUserDetails());
-	}, []);
+	}, [dispatch]);
 	return (
 		<>
 			{loading ? (
@@ -55,15 +56,15 @@ const Account = () => {
 							<div className="detailsBox">
 								<div>
 									<h1>Full Name</h1>
-									<p>{user.name}</p>
+									<p>{user && user.name}</p>
 								</div>
 								<div>
 									<h1>Email</h1>
-									<p>{user.email}</p>
+									<p>{user && user.email}</p>
 								</div>
 								<div>
 									<h1>Joined-On</h1>
-									<p>{user.createdAt}10-22-2022</p>
+									<p>{user && user.createdAt}10-22-2022</p>
 								</div>
 							</div>
 						</Col>

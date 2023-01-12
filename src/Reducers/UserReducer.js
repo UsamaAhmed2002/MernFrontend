@@ -66,7 +66,6 @@ export const UserReducer = (state = { user: {} }, action) => {
 		case CLEAR_ERRORS:
 			return {
 				loading: false,
-				...state,
 				error: null,
 			};
 		default:
