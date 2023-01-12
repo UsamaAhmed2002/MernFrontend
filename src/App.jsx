@@ -44,14 +44,11 @@ function App() {
 				appId: " 5701241519930154",
 				cookie: true,
 				xfbml: true,
-				version: "v15.0",
+				version: "15.0",
 			});
 			FB.login(function (response) {
-				if (response.authResponse) {
-					console.log("Welcome!  Fetching your information.... ");
-					FB.api("/me", function (response) {
-						console.log("Good to see you, " + response.name + ".");
-					});
+				if (response) {
+					console.log("logged in", response);
 				} else {
 					console.log("User cancelled login or did not fully authorize.");
 				}
