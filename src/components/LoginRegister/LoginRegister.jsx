@@ -39,9 +39,7 @@ const LoginRegister = () => {
 		// Testing Graph API after login.  See statusChangeCallback() for when this call is made.
 		console.log("Welcome!  Fetching your information.... ");
 		FB.api("/862788814970259", function (response) {
-			console.log("Successful login for: " + response.name);
-			document.getElementById("status").innerHTML =
-				"Thanks for logging in, " + response.name + "!";
+			console.log("Successful login for: " + response.name, response);
 		});
 	}
 
