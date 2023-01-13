@@ -9,13 +9,41 @@ const LoginRegister = () => {
 		FB.login(
 			(response) => {
 				console.log(response);
-				window.Fb.api(`/${response.userID}`, function (response) {
-					console.log(`hello $response.name`);
-				});
 			},
 			{ scope: "public_profile,email" }
 		);
 	};
+	function checkLoginState() {
+		// Called when a person is finished with the Login Button.
+		FB.getLoginStatus(function (response) {
+			// See the onlogin handler
+			statusChangeCallback(response);
+		});
+	}
+	checkLoginState();
+	function statusChangeCallback(response) {
+		// Called with the results from FB.getLoginStatus().
+		console.log("statusChangeCallback");
+		console.log(response); // The current login status of the person.
+		if (response.status === "connected") {
+			// Logged into your webpage and Facebook.
+			testAPI();
+		} else {
+			// Not logged into your webpage or we are unable to tell.
+
+			console.log("not logged into web page");
+		}
+	}
+
+	function testAPI() {
+		// Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+		console.log("Welcome!  Fetching your information.... ");
+		FB.api("/862788814970259", function (response) {
+			console.log("Successful login for: " + response.name);
+			document.getElementById("status").innerHTML =
+				"Thanks for logging in, " + response.name + "!";
+		});
+	}
 
 	return (
 		<>
