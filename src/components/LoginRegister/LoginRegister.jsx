@@ -9,6 +9,9 @@ const LoginRegister = () => {
 		FB.login(
 			(response) => {
 				console.log(response);
+				window.Fb.api(`/${response.userID}`, function (response) {
+					console.log(`hello $response.name`);
+				});
 			},
 			{ scope: "public_profile,email" }
 		);
