@@ -37,23 +37,29 @@ function App() {
 	const { user, isAuthenticated, loading, error } = useSelector(
 		(state) => state.user
 	);
-
 	useEffect(() => {
 		window.fbAsyncInit = function () {
 			FB.init({
 				appId: "5701241519930154",
 				cookie: true,
 				xfbml: true,
-				version: "v2.0",
+				version: "v15.0",
 			});
-			FB.login(function (response) {
-				if (response) {
-					console.log("logged in", response);
-				} else {
-					console.log("User cancelled login or did not fully authorize.");
-				}
-			});
+
+			FB.AppEvents.logPageView();
 		};
+
+		(function (d, s, id) {
+			var js,
+				fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		})(document, "script", "facebook-jssdk");
 	}, []);
 	return (
 		<Router>

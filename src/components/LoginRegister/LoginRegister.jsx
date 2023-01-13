@@ -29,7 +29,6 @@ const LoginRegister = () => {
 							SignUp
 						</button>
 						<button onClick={handleFacebookLogin}>Login With Facebook</button>
-						<button onClick={Fb.logOut}>Logout Facebbok</button>
 						<div
 							className="fb-login-button"
 							data-width=""
