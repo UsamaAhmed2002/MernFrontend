@@ -13,6 +13,7 @@ const LoginRegister = () => {
 			{ scope: "public_profile,email" }
 		);
 	};
+
 	return (
 		<>
 			<div className="mainContainer">
@@ -28,6 +29,16 @@ const LoginRegister = () => {
 							SignUp
 						</button>
 						<button onClick={handleFacebookLogin}>Login With Facebook</button>
+						<button onClick={Fb.logOut}>Logout Facebbok</button>
+						<div
+							className="fb-login-button"
+							data-width=""
+							data-size="medium"
+							data-button-type="continue_with"
+							data-layout="default"
+							data-auto-logout-link="true"
+							data-use-continue-as="true"
+						></div>
 					</div>
 					{form === "LoginForm" ? <LoginForm /> : <RegisterForm />}
 				</div>
